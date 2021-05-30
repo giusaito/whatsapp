@@ -1,0 +1,21 @@
+{
+  "secretKey": "ITFejds338qnHDhH1QWedg21WbaTk2221sJS8EW",
+  "host": "http://localhost",
+  "port": "21465",
+  "startAllSession": true,
+  "webhook": {
+    "url": "http://localhost:21465/api",
+    "autoDownload": true,
+    "readMessage": true,
+    "allUnreadOnStart": true
+  },
+  "archive": {
+    "enable": true,
+    "waitTime": 10,
+    "daysToArchive": 45
+  },
+  "log": {
+    "level": "error",
+    "logger": [ "console", "file" ]
+  }
+}
