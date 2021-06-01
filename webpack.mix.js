@@ -1,21 +1,3 @@
-/**
- * Projeto: CGN-VIDEO-PORTAL
- * Arquivo: webpack.mix.js
- * ---------------------------------------------------------------------
- * Autor: Leonardo Nascimento
- * E-mail: leonardo.nascimento21@gmail.com
- * ---------------------------------------------------------------------
- * Data da criação: 11/05/2021 5:49:31 pm
- * Last Modified:  18/05/2021 1:27:59 pm
- * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
- * ---------------------------------------------------------------------
- * Copyright (c) 2021 Leo
- * HISTORY:
- * Date      	By	Comments
- * ----------	---	---------------------------------------------------------
- */
-
-
 const mix = require('laravel-mix');
 
 /*
@@ -30,5 +12,5 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+    .vue()
+    .sass('resources/sass/app.scss', 'public/css');

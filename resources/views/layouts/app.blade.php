@@ -1,25 +1,5 @@
-<?php
-/*
- * Projeto: CGN-VIDEO-PORTAL
- * Arquivo: app.blade.php
- * ---------------------------------------------------------------------
- * Autor: Leonardo Nascimento
- * E-mail: leonardo.nascimento21@gmail.com
- * ---------------------------------------------------------------------
- * Data da criação: 18/05/2021 11:32:31 am
- * Last Modified:  18/05/2021 2:55:53 pm
- * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
- * ---------------------------------------------------------------------
- * Copyright (c) 2021 Leo
- * HISTORY:
- * Date      	By	Comments
- * ----------	---	---------------------------------------------------------
- */
-
-
-?>
 <!doctype html>
-<html lang="pt-BR">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

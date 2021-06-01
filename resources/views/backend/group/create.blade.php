@@ -1,13 +1,13 @@
 <?php
 /*
- * Projeto: CGN-VIDEO-PORTAL
+ * Projeto: whatsapp
  * Arquivo: create.blade.php
  * ---------------------------------------------------------------------
  * Autor: Leonardo Nascimento
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
- * Data da criação: 19/05/2021 3:43:31 pm
- * Last Modified:  24/05/2021 4:31:18 pm
+ * Data da criação: 31/05/2021 9:17:48 am
+ * Last Modified:  31/05/2021 5:26:21 pm
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -48,7 +48,7 @@
         <button type="submit" class="btn btn-success">Adicionar Grupo</button>
       </div>
     </form>
-    <small>Ao clicar em adicionar grupo, será enviado uma requisição ao WhatsApp afim de obter o código do grupo, isso pode demorar alguns segundos..</small>
+    <h6 class="mt-3">Ao clicar em adicionar grupo, será enviado uma requisição ao WhatsApp afim de obter o código do grupo, isso pode demorar alguns segundos..</h6>
   </div>
 </div>
 @endsection

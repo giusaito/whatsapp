@@ -1,13 +1,13 @@
 <?php
 /*
- * Projeto: CGN-VIDEO-PORTAL
+ * Projeto: whatsapp
  * Arquivo: backend.blade.php
  * ---------------------------------------------------------------------
  * Autor: Leonardo Nascimento
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
- * Data da criação: 19/05/2021 10:47:44 am
- * Last Modified:  24/05/2021 4:44:23 pm
+ * Data da criação: 31/05/2021 9:17:48 am
+ * Last Modified:  01/06/2021 4:59:21 pm
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -23,7 +23,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title')- CGN</title>
+  <title>@yield('title') - CGN</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="web-author" content="Leonardo Nascimento">
   <meta name="reply-to" content="leonardo.nascimento21@gmail.com">
@@ -51,6 +51,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+<link rel="icon" id="favicon" href="https://cdn.cgn.inf.br/cgn-cdn/fotos-cgn/2020/02/06134213/cropped-favicon-cgn3-192x192.png" sizes="192x192" />
 
 
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -81,7 +82,7 @@
         <a href="{{route('backend.home')}}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('backend.noticia.create')}}" class="nav-link" style="color:red !important;">Enviar Notícia</a>
+        <a href="{{route('backend.noticia.create')}}" class="nav-link" style="color:red !important;">Compartilhar Notícia</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('backend.grupo.create')}}" class="nav-link">Adicionar Grupo</a>
@@ -89,90 +90,18 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('backend.usuario.create')}}" class="nav-link">Adicionar Usuário</a>
       </li>
+    <div id="app">
+        <div class="mt-2">
+        <status-whats revalidate-url="{{date('dmYHi')}}"></status-whats>
+        </div>
+    </div>
+
+
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Procurar Ocorrência" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
-
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -228,6 +157,9 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
           <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          @if(Auth::user()->email == 'leonardo.nascimento21@gmail.com')
+            <p class="text-white">Status: {{date('dmYHi')}}</p>
+          @endif
         </div>
       </div>
 
@@ -261,7 +193,7 @@
             <a href="{{route('backend.noticia.index')}}" class="nav-link">
               <i class="nav-icon fab fa-whatsapp"></i>
               <p>
-                Enviar notícia
+                Lista de Notícias
                 {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
@@ -964,6 +896,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('assets')}}/dist/js/pages/dashboard.js"></script>
 <script src="{{asset('dev.js')}}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 
  <script>

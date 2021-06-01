@@ -1,4 +1,20 @@
 <?php
+/*
+ * Projeto: whatsapp
+ * Arquivo: NewsController.php
+ * ---------------------------------------------------------------------
+ * Autor: Leonardo Nascimento
+ * E-mail: leonardo.nascimento21@gmail.com
+ * ---------------------------------------------------------------------
+ * Data da criação: 31/05/2021 9:17:37 am
+ * Last Modified:  01/06/2021 12:05:32 pm
+ * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
+ * ---------------------------------------------------------------------
+ * Copyright (c) 2021 Leo
+ * HISTORY:
+ * Date      	By	Comments
+ * ----------	---	---------------------------------------------------------
+ */
 
 namespace App\Http\Controllers\Backend;
 
@@ -9,7 +25,7 @@ use App\Models\Group;
 use Session;
 use Cache;
 use Wppconnect;
-
+use View;
 class NewsController extends BackendController
 {
     /**
@@ -51,18 +67,12 @@ class NewsController extends BackendController
         if(Session::get('token') && Session::get('session') && Session::get('init')){
             Wppconnect::make($this->url);
 
-            $news = News::create([
-                'url' => $request->url,
-                'usr_singup' => bcrypt($request->password),
-                'enviado' => 'NAO'
-            ]);
-
-            if(Cache::has('all_groups')){
-                $groups = Cache::get('all_groups'); 
+            if(Cache::has('active_groups')){
+                $groups = Cache::get('active_groups');
             }else {
-                 $groups = Group::get();
+                 $groups = Group::where('status', 'ATIVO')->get();
                 // 1 Semana de cache
-                Cache::put('all_groups', $groups, 604800);
+                Cache::put('active_groups', $groups, 604800);
             }
 
             foreach ($groups as $key => $group) {
@@ -73,12 +83,18 @@ class NewsController extends BackendController
                ])->withHeaders([
                 'Authorization' => 'Bearer '.Session::get('token')
                ])->asJson()->post();
-            
+
                 $response = json_decode($response->getBody()->getContents(),true);
                 sleep(2);
             }
 
-         return redirect()->route('backend.noticia.index')->with(['message' => 'Notícia enviada com sucesso', 'alert-type'=> 'success']);
+            $news = News::create([
+                'url' => $request->url,
+                'cadastrado_por' => bcrypt($request->password),
+                'enviado' => 'SIM'
+            ]);
+
+         return redirect()->route('backend.noticia.index')->with(['message' => 'Notícia compartilhada com sucesso', 'alert-type'=> 'success']);
 
         } else {
             dd(Session::get('token'));

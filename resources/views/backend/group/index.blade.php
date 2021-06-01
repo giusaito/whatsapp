@@ -1,3 +1,23 @@
+<?php
+/*
+ * Projeto: whatsapp
+ * Arquivo: index.blade.php
+ * ---------------------------------------------------------------------
+ * Autor: Leonardo Nascimento
+ * E-mail: leonardo.nascimento21@gmail.com
+ * ---------------------------------------------------------------------
+ * Data da criação: 31/05/2021 9:17:48 am
+ * Last Modified:  31/05/2021 1:36:49 pm
+ * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
+ * ---------------------------------------------------------------------
+ * Copyright (c) 2021 Leo
+ * HISTORY:
+ * Date      	By	Comments
+ * ----------	---	---------------------------------------------------------
+ */
+
+
+?>
 @extends('layouts.backend')
 @section('title','Lista de Grupos')
 @section('subtitle','Lista de Grupos')

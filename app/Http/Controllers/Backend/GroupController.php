@@ -17,7 +17,7 @@ class GroupController extends BackendController
 
     public function index(){
         if(Cache::has('all_groups')){
-            $records = Cache::get('all_groups'); 
+            $records = Cache::get('all_groups');
         }else {
              $records = Group::OrderBy('id', 'desc')->paginate('10');
             // 1 Semana de cache
@@ -38,7 +38,7 @@ class GroupController extends BackendController
            ])->withHeaders([
             'Authorization' => 'Bearer '.Session::get('token')
            ])->asJson()->post();
-        
+
             $response = json_decode($response->getBody()->getContents(),true);
 
            $grupo = Group::firstOrCreate([
@@ -49,6 +49,7 @@ class GroupController extends BackendController
         	]);
 
            Cache::forget('all_groups');
+           Cache::forget('active_groups');
 
         return redirect()->route('backend.grupo.index')->with(['message' => 'Grupo ' . $response['response']['subject'] . ' criado com sucesso', 'alert-type'=> 'success']);
 
