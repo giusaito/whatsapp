@@ -19,7 +19,7 @@ class BackendController extends Controller
     {
         $this->url = config('wppconnect.defaults.base_uri');
         $this->key = config('wppconnect.defaults.secret_key');
-        $this->session = "fd";
+        $this->session = "itfcgn";
     }
 
     public function index()

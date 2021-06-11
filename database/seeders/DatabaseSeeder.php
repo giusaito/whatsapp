@@ -7,7 +7,7 @@
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
  * Data da criação: 11/05/2021 5:49:31 pm
- * Last Modified:  19/05/2021 6:06:44 pm
+ * Last Modified: Mon Jun 07 2021
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
 
         $admin = new User();
         $admin->name = 'Leonardo Nascimento';
-        $admin->email = 'leonardo.nascimento21@gmail.com';
+        $admin->email = 'demo@demo.com';
         $admin->password = bcrypt('12345678');
         $admin->status_user = 1;
         $admin->save();

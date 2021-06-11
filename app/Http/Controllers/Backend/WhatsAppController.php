@@ -7,7 +7,7 @@
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
  * Data da criação: 31/05/2021 9:17:37 am
- * Last Modified:  01/06/2021 4:56:15 pm
+ * Last Modified: Wed Jun 09 2021
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -86,7 +86,7 @@ class WhatsAppController extends BackendController
                     'Authorization' => 'Bearer '.Session::get('token')
                     ])->asJson()->post();
                     $response = json_decode($response->getBody()->getContents(),true);
-                    dd($response);
+                    Session::flush();
                 endif;
             }else {
                 abort(404);
@@ -121,15 +121,70 @@ class WhatsAppController extends BackendController
             }
         }
     }
-    public function qr(){
-    	if(Session::get('token') and Session::get('session')):
+
+
+    public function startSession(){
             Wppconnect::make($this->url);
-            $response = Wppconnect::to('/api/'.Session::get('session').'/status-session')->withHeaders([
+            $response = Wppconnect::to('/api/testando/'. $this->key .'/generate-token')->withHeaders([
                 'Authorization' => 'Bearer '.Session::get('token')
-            ])->asJson()->get();
+            ])->asJson()->post();
             $response = json_decode($response->getBody()->getContents(),true);
-            echo 'oi';
+            Session::put('init', true);
+            echo ' sessão iniciada';
             dd($response);
-        endif;
+
+    }
+
+    public function qr(){
+
+        // Caso não tenha seção e nem token, inicia-se
+        if(!Session::get('token') && !Session::get('session')){
+            Wppconnect::make($this->url);
+            $response = Wppconnect::to('/api/'.$this->session.'/'.$this->key.'/generate-token')->asJson()->post();
+            $response = json_decode($response->getBody()->getContents(),true);
+            if($response['status'] == 'Success'){
+                Session::put('token', $response['token']);
+                Session::put('session', $response['session']);
+            }
+        }
+
+        // Tem sessão e token, mas não está iniciado
+         if(Session::get('token') && Session::get('session') && !Session::get('init')){
+            Wppconnect::make($this->url);
+            $response = Wppconnect::to('/api/'.Session::get('session').'/start-session')->withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token')
+            ])->asJson()->post();
+                $response = json_decode($response->getBody()->getContents(),true);
+                Session::put('init', true);
+            }
+
+
+            if(Session::get('token') and Session::get('session') and Session::get('init')):
+                Wppconnect::make($this->url);
+                $response = Wppconnect::to('/api/'. Session::get('session').'/check-connection-session')->withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token')
+                ])->asJson()->get();
+                $status = json_decode($response->getBody()->getContents(),true);
+                if($status['message'] == "Disconnected"){
+                    Wppconnect::make($this->url);
+                    $response = Wppconnect::to('/api/'.Session::get('session').'/status-session')->withHeaders([
+                        'Authorization' => 'Bearer '.Session::get('token')
+                    ])->asJson()->get();
+                        $response = json_decode($response->getBody()->getContents(),true);
+                }
+                // dd($response);
+            endif;
+
+        return view('backend.whatsapp.login', compact('response'));
+    }
+
+    public function qrcodeUpdate(){
+        Wppconnect::make($this->url);
+                    $response = Wppconnect::to('/api/'.Session::get('session').'/status-session')->withHeaders([
+                        'Authorization' => 'Bearer '.Session::get('token')
+                    ])->asJson()->get();
+                        $response = json_decode($response->getBody()->getContents(),true);
+
+        return $response;
     }
 }

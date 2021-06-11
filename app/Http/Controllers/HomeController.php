@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\News;
+use App\Models\Group;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $news = News::where('enviado', 'SIM')->count();
+        $groups = Group::count();
+        return view ('backend.index.index', compact('news', 'groups'));
+
     }
 }

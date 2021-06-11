@@ -55,4 +55,14 @@ class GroupController extends BackendController
 
         }
     }
+
+    public function search(Request $request){
+        $search = $request->pesquisar;
+        $records = Group::where(function($query) use($search){
+            $searchWildcard = '%' . $search . '%';
+            $query->orWhere('name', 'LIKE', $searchWildcard);
+        })->orderBy('id', 'desc')->paginate(10);
+        return view('backend.group.search', compact('records'));
+
+    }
 }

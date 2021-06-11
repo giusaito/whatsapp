@@ -7,7 +7,7 @@
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
  * Data da criação: 31/05/2021 9:17:37 am
- * Last Modified:  01/06/2021 12:05:32 pm
+ * Last Modified: Wed Jun 09 2021
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -64,6 +64,17 @@ class NewsController extends BackendController
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'url' => 'required|url'
+        ]);
+
+       $cgn =  \Str::contains($request->url, 'https://cgn.inf.br');
+        if(!$cgn) {
+            return redirect()->route('backend.noticia.create')->with(['message' => 'A URL informada não corresponde a CGN.INF.BR', 'alert-type'=> 'error']);
+
+        }
+
         if(Session::get('token') && Session::get('session') && Session::get('init')){
             Wppconnect::make($this->url);
 
@@ -145,5 +156,14 @@ class NewsController extends BackendController
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        $search = $request->pesquisar;
+        $records = News::where(function($query) use($search){
+            $searchWildcard = '%' . $search . '%';
+            $query->orWhere('url', 'LIKE', $searchWildcard);
+        })->orderBy('id', 'desc')->paginate(10);
+        return view('backend.news.search', compact('records'));
     }
 }

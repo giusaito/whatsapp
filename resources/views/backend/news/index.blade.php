@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="col-12">
-    <a href="{{route('backend.noticia.create')}}" class="btn btn-success m-2">Adicionar</a>
+    <a href="{{route('backend.noticia.create')}}" class="btn btn-success m-2">Compartilhar notícia</a>
     <div class="card">
         <div class="card-header">
         <form action="{{route('backend.noticia.search')}}" method="GET">

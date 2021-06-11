@@ -7,7 +7,7 @@
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
  * Data da criação: 19/05/2021 3:13:49 pm
- * Last Modified:  24/05/2021 4:37:01 pm
+ * Last Modified: Wed Jun 09 2021
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $records = User::with('userProfile')->orderBy('id', 'desc')->paginate(10);
+        $records = User::orderBy('id', 'desc')->paginate(10);
         return view('backend.user.index', compact('records'));
     }
 

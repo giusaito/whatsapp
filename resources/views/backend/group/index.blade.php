@@ -7,7 +7,7 @@
  * E-mail: leonardo.nascimento21@gmail.com
  * ---------------------------------------------------------------------
  * Data da criação: 31/05/2021 9:17:48 am
- * Last Modified:  31/05/2021 1:36:49 pm
+ * Last Modified: Wed Jun 09 2021
  * Modified By: Leonardo Nascimento - <leonardo.nascimento21@gmail.com> / MAC OS
  * ---------------------------------------------------------------------
  * Copyright (c) 2021 Leo
@@ -46,6 +46,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Nome</th>
                 <th>ID Grupo</th>
                 <th>Url</th>
             </tr>
@@ -54,6 +55,7 @@
             @foreach($records as $record)
                 <tr>
                     <td>{{$record->id}}</td>
+                    <td>{{$record->name}}</td>
                     <td>{{$record->group_id}}</td>
                     <td>{{$record->invite_share}}</td>
                     <td>{{$record->status}}</td>
